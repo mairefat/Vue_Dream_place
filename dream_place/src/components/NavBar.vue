@@ -1,6 +1,6 @@
 <!-- Navbar.vue -->
 <template>
-    <nav class="bg-white p-4" >
+    <nav class="bg-white fixed p-4 w-full z-50" >
     <div class="container mx-auto flex items-center justify-between">
       <div class="text-black text-lg flex items-center space-x-2 font-bold">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -17,9 +17,80 @@
           <router-link to="/contact" class="text-black">Contact</router-link>
         </div>
 
-        <div class="hidden md:flex items-center space-x-4 bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded">
-          <router-link to="/register" class="text-white">Register</router-link>
+        <!-- register button -->
+
+        <div v-if="!isLoggedIn" class="hidden md:flex items-center space-x-4 bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded">
+      <router-link to="/signup" class="text-white">Register</router-link>
+    </div>
+
+        <!-- notification and profile account -->
+        <div v-if="isLoggedIn" class="hidden xl:flex space-x-5 items-center">
+      <a class="flex items-center hover:text-gray-200" href="#">
+        <i class="fas fa-bell" style="font-size: 24px; color: gray;"></i>
+        <span class="flex absolute -mt-5 ml-4">
+          <span class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-red-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+        </span>
+      </a>
+
+          <!-- profile dropdown -->
+          <div class="py-3 relative" @click="toggleDropdown">
+        <!-- Profile Picture -->
+        <div class="flex justify-center items-center space-x-3 cursor-pointer">
+          <div class="w-12 h-12 rounded-full overflow-hidden">
+            <!-- You might want to replace this with the actual profile picture -->
+            <img src="../assets/images/Ellipse 2.svg" alt="profile pic" class="w-full h-full object-cover">
+          </div>
         </div>
+
+        <!-- Profile Dropdown -->
+        <div v-show="isDropdownVisible" class="absolute top-full left-1/2 transform -translate-x-1/2 w-60 px-5 py-3 bg-gray-200 rounded-lg shadow border-transparent mt-3">
+      <ul class="space-y-3">
+            <li class="font-medium">
+              <a href="#" class="flex items-center transform transition-colors duration-200 border-r-4 border-transparent ">
+                <div class="mr-3">
+                  <svg class="w-6 h-6 "  fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                </div>
+                Account
+              </a>
+            </li>
+            <hr class="border-gray-400">
+            <li class="font-medium">
+              <a href="#" class="flex items-center transform transition-colors duration-200 border-r-4 border-transparent ">
+                <div class="mr-3" >
+                  <svg class="text-gray-400"  height="1em" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M381 114.9L186.1 41.8c-16.7-6.2-35.2-5.3-51.1 2.7L89.1 67.4C78 73 77.2 88.5 87.6 95.2l146.9 94.5L136 240 77.8 214.1c-8.7-3.9-18.8-3.7-27.3 .6L18.3 230.8c-9.3 4.7-11.8 16.8-5 24.7l73.1 85.3c6.1 7.1 15 11.2 24.3 11.2H248.4c5 0 9.9-1.2 14.3-3.4L535.6 212.2c46.5-23.3 82.5-63.3 100.8-112C645.9 75 627.2 48 600.2 48H542.8c-20.2 0-40.2 4.8-58.2 14L381 114.9zM0 480c0 17.7 14.3 32 32 32H608c17.7 0 32-14.3 32-32s-14.3-32-32-32H32c-17.7 0-32 14.3-32 32z"/></svg>
+                </div>
+                My Trips
+              </a>
+            </li>
+            <hr class="border-gray-400">
+            <li class="font-medium">
+              <a href="#" class="flex items-center transform transition-colors duration-200 border-r-4 border-transparent ">
+                <div class="mr-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" style="svg{fill:#6d6f74}">
+                  <path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V192c0-35.3-28.7-64-64-64H80c-8.8 0-16-7.2-16-16s7.2-16 16-16H448c17.7 0 32-14.3 32-32s-14.3-32-32-32H64zM416 272a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg>
+                </div>
+                Reward and wallet
+              </a>
+            </li>
+            
+            <hr class="border-gray-400">
+            <li class="font-medium">
+              <a href="#" class="flex items-center transform transition-colors duration-200 border-r-4 border-transparent ">
+                <div class="mr-3 ">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                </div>
+                Sign out
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+  
+
+        </div>
+        
   
         <div class="md:hidden">
           <button @click="toggleMobileMenu" class="text-black">
@@ -51,23 +122,35 @@
     </nav>
   </template>
   
-  <script>
-  export default {
-    data() {
-      return {
-        isMobileMenuOpen: false,
-      };
-    },
-    methods: {
-      toggleMobileMenu() {
-        this.isMobileMenuOpen = !this.isMobileMenuOpen;
-      },
-    },
-  };
-  </script>
+  <script setup>
+import '@fortawesome/fontawesome-free/css/all.css';
+import { ref } from 'vue';
+
+// import { useRouter } from 'vue-router';
+import { useAuthStore } from '@/assets/store/index.js'; // Adjust the path accordingly
+
+// const router = useRouter();
+const authStore = useAuthStore();
+const isDropdownVisible = ref(false);
+
+const isLoggedIn = ref(authStore.token !== null);
+
+const toggleDropdown = () => {
+  isDropdownVisible.value = !isDropdownVisible.value;
+};
+
+const isMobileMenuOpen = ref(false);
+
+const toggleMobileMenu = () => {
+  isMobileMenuOpen.value = !isMobileMenuOpen.value;
+};
+
+
+</script>
+
   
   <style scoped>
 @import '../assets/css/main.css';
-  /* Add any additional styling here */
+  /* Add any additional styling here */  
   </style>
   
