@@ -3,9 +3,7 @@
     <!-- <img alt="Vue logo" src="../assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <NavBar />
-    <div>
-      <h1>body</h1>
-    </div>
+    <HomeContent />
     <FooterBar />
   </div>
 </template>
@@ -15,12 +13,16 @@
 // import HelloWorld from '@/components/HelloWorld.vue'
 import NavBar from '@/components/NavBar.vue';
 import FooterBar from '@/components/FooterBar.vue';
+import HomeContent from '@/components/HomeContent.vue';
+
 
 export default {
   name: 'HomeView',
   components: {
     NavBar,
+    HomeContent,
     FooterBar,
+
   }
 }
 </script>

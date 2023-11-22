@@ -1,4 +1,5 @@
 <template>
+  <div>
     <div class="px-4 pt-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
       <div class="grid gap-16 row-gap-10 mb-8 lg:grid-cols-6">
         <div class="md:max-w-md lg:col-span-2">
@@ -19,16 +20,19 @@
             <p class="font-semibold tracking-wide text-gray-800">Company</p>
             <ul class="mt-2 space-y-2">
               <li>
-                <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">News</a>
+                <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">About</a>
               </li>
               <li>
-                <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">World</a>
+                <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">Jobs</a>
               </li>
               <li>
-                <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">Games</a>
+                <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">Newsroom</a>
               </li>
               <li>
-                <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">References</a>
+                <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">Advertising</a>
+              </li>
+              <li>
+                <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">Contact US</a>
               </li>
             </ul>
           </div>
@@ -36,39 +40,42 @@
             <p class="font-semibold tracking-wide text-gray-800">Explore</p>
             <ul class="mt-2 space-y-2">
               <li>
-                <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">Web</a>
+                <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">Australia</a>
               </li>
               <li>
-                <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">eCommerce</a>
+                <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">New Zealand</a>
               </li>
               <li>
-                <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">Business</a>
+                <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">United States America (USA)</a>
               </li>
               <li>
-                <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">Entertainment</a>
+                <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">Greece</a>
               </li>
               <li>
-                <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">Portfolio</a>
+                <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">Maldives</a>
+              </li>
+              <li>
+                <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">Singapore</a>
+              </li>
+              <li>
+                <a href="/" class="text-blue-600 transition-colors duration-300 hover:text-deep-purple-accent-400">See more</a>
               </li>
             </ul>
           </div>
           <div>
-            <p class="font-semibold tracking-wide text-gray-800">Terms&Policies</p>
+            <p class="font-semibold tracking-wide text-gray-800">Terms and Policies</p>
             <ul class="mt-2 space-y-2">
               <li>
-                <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">Media</a>
+                <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">Privacy Policy</a>
               </li>
               <li>
-                <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">Brochure</a>
+                <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">Terms of use</a>
               </li>
               <li>
-                <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">Nonprofit</a>
+                <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">Acessibility</a>
               </li>
               <li>
-                <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">Educational</a>
-              </li>
-              <li>
-                <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">Projects</a>
+                <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">Reward system policy</a>
               </li>
             </ul>
           </div>
@@ -76,29 +83,33 @@
             <p class="font-semibold tracking-wide text-gray-800">Help</p>
             <ul class="mt-2 space-y-2">
               <li>
-                <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">Infopreneur</a>
+                <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">Support</a>
               </li>
               <li>
-                <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">Personal</a>
+                <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">Cancle your bookings</a>
               </li>
               <li>
-                <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">Wiki</a>
+                <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">Use Coupon</a>
               </li>
               <li>
-                <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">Forum</a>
+                <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">Refund Policies</a>
+              </li>
+              <li>
+                <a href="/" class="text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400">International Travel Documents</a>
               </li>
             </ul>
           </div>
         </div>
       </div>
-      <div class="bg-gray-200 flex flex-col justify-end pt-5 pb-10 border-t sm:flex-row">
-        <div class="flex items-center mt-4 space-x-4 sm:mt-0">
-            <p class="text-sm text-gray-700">
+    </div>
+    <div class="bg-gray-200 flex flex-col justify-end pt-5 pb-10 border-t sm:flex-row">
+        <div class="flex items-center mt-4 space-x-4 sm:mt-0 ">
+            <p class="text-sm text-gray-700 mr-20 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
           © myDreamPlace 2020.
         </p>
         </div>
       </div>
-    </div>
+      </div>
   </template>
 
 <script setup>
