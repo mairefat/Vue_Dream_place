@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
 import SignUp from '../views/SignUp.vue';
 import WelcomeCard from '../views/WelcomeCard.vue';
+import SearchResult from '../views/SearchResult.vue';
+import PropertyDetails from '../views/PropertyDetails.vue';
 
 const routes = [
   {
@@ -18,6 +20,16 @@ const routes = [
     path: '/welcom',
     name: 'welcome',
     component: WelcomeCard
+  },
+  {
+    path: '/searchResult',
+    name: 'searchResult',
+    component: SearchResult
+  },
+  {
+    path: '/propertyDetails',
+    name: 'PropertyDetails',
+    component: PropertyDetails
   }
 ]
 

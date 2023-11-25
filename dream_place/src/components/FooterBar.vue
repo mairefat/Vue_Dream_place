@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="px-4 pt-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
+  <div >
+    <div class="bottom-0 px-4 pt-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
       <div class="grid gap-16 row-gap-10 mb-8 lg:grid-cols-6">
         <div class="md:max-w-md lg:col-span-2">
             <div class="text-black text-lg flex items-center space-x-2 font-bold">

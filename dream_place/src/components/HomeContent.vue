@@ -1,30 +1,27 @@
 <template>
-    <div>
-        <div class="container mx-auto">
-  <!-- Background image -->
-  <div class="relative h-screen bg-cover bg-center">
-  <img class="object-cover w-full h-full rounded-md absolute inset-0" alt="Background Image" src="../assets/images/Rectangle 2.png">
+     <div>
+    <div class="container mx-auto relative">
+      <!-- Background image -->
+      <div class="relative h-screen bg-cover bg-center">
+        <img class="object-cover w-full h-full rounded-md absolute inset-0" alt="Background Image" src="../assets/images/Rectangle 2.png">
 
-  <div class="absolute inset-0 flex items-center justify-center">
-    <div class="text-center text-white">
-      <h1 class="text-4xl font-bold">Enjoy Your Dream Vacation</h1>
-      <p class="mt-4 text-lg">Plan and book our perfect trip with expert advice, travel tips, destination <br>
-         information, and inspiration from us</p>
-    </div>
-  </div>
-</div>
-
-        <!-- COVID alert -->
-        <div class="mt-4 px-4 py-3 text-gray-600  shadow-sm rounded-md" style="background-color: #FCEFCA;">
-            <p style="display: flex; align-items: center;">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="black" fill="none" width="24" height="24" style="margin-right: 20px;">
-                    <path d="M12 2L1 21h22L12 2zm-1 16h2v2h-2zm0-4h2v4h-2zm0-6h2v4h-2z"/>
-                </svg>
-                Check the latest COVID-19 restrictions before you travel.
-                <span class="text-blue-500"> Learn more</span>
-            </p>
+        <div class="absolute inset-0 flex items-center justify-center">
+          <div class="text-center text-white">
+            <h1 class="text-4xl font-bold">Enjoy Your Dream Vacation</h1>
+            <p class="mt-4 text-lg">Plan and book our perfect trip with expert advice, travel tips, destination <br>
+               information, and inspiration from us</p>
+          </div>
         </div>
 
+        <!-- Partially display the search bar above the background image from the bottom -->
+        <div class="absolute  top-[59%]  w-full h-1/2 flex justify-center items-end">
+          <SearchBar class="w-5/6" />
+        </div>
+      </div>
+
+       
+        <!-- COVID alert -->
+      <CovidAlert />
         <!-- paragraph -->
         <div class="py-8 ">
             <h3 class="font-bold text-lg">Enjoy your dream vacation</h3>
@@ -323,8 +320,17 @@
 
 </template>
 
-<script setup>
+<script >
+import CovidAlert from './CovidAlert.vue';
+import SearchBar from './SearchBar.vue';
 
+
+export default {
+components: {
+SearchBar,
+CovidAlert,
+}
+}
 </script>
 
 <style lang="scss" scoped>
