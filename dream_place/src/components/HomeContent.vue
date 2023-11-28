@@ -297,7 +297,7 @@
   <div class="absolute top-0 left-4 p-8 text-white">
     <p class="mb-4 font-bold text-xl">Download the mobile application for bonus <br> coupons and travel codes</p>
     <div class="rounded">
-      <router-link to="/register" class="text-white inline-flex items-center px-3 py-2 rounded bg-blue-500 hover:bg-blue-700 hover:text-blue-500">
+      <router-link to="#" class="text-white inline-flex items-center px-3 py-2 rounded bg-blue-500 hover:bg-blue-700 hover:text-blue-500">
         Download mobile app
       </router-link>
     </div>

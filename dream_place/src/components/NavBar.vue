@@ -11,10 +11,10 @@
   
         <div class="hidden md:flex space-x-4 mx-auto">
           <router-link to="/" class="text-black">Home</router-link>
-          <router-link to="/discover" class="text-black">Dicover</router-link>
-          <router-link to="/activities" class="text-black">Activities</router-link>
-          <router-link to="/about" class="text-black">About</router-link>
-          <router-link to="/contact" class="text-black">Contact</router-link>
+          <router-link to="#" class="text-black">Dicover</router-link>
+          <router-link to="#" class="text-black">Activities</router-link>
+          <router-link to="#" class="text-black">About</router-link>
+          <router-link to="#" class="text-black">Contact</router-link>
         </div>
 
         <!-- register button -->

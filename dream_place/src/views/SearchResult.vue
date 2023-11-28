@@ -75,7 +75,7 @@
       <p class="text-md font-semibold pb-2">Your budget per day</p>
       <hr>
       <!-- Checkbox and range input -->
-      <div class="pt-4 flex justify-between items-center">
+      <div class="pt-4 flex items-center">
         <label class="flex items-center">
           <input type="checkbox" class="ml-4 w-5 h-5" v-model="showMinMax" />
           <span class="ml-2 mr-2">$0 - $100</span>
@@ -91,7 +91,7 @@
           class="ml-2"
         />
 
-        <div class="ml-2">100</div>
+        
       </div>
 
       <div class="pt-2 flex justify-between items-center">
@@ -110,7 +110,7 @@
           class="ml-2"
         />
 
-        <div class="ml-2">100</div>
+        
       </div>
       <div class="pt-2 flex justify-between items-center">
         <label class="flex items-center">
@@ -128,7 +128,7 @@
           class="ml-2"
         />
 
-        <div class="ml-2">100</div>
+        
       </div>
 
       <!-- Set your own budget section -->
@@ -218,26 +218,31 @@
       </div>
 
       <!-- Search Results -->
-      <div class="grid w-full gap-8 lg:w-8/12 lg:grid-cols-1">
+      <div v-for="hotel in $store.searchResults" :key="hotel.hotel_id" class="grid w-full gap-8 lg:w-8/12 lg:grid-cols-1">
 
         <div class="flex-col justify-center h-screen">
     <div class="relative flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs md:max-w-3xl mx-auto border border-white bg-white">
       <div class="w-full md:w-1/3 bg-white grid place-items-center">
         <img
-          src="https://images.pexels.com/photos/4381392/pexels-photo-4381392.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-          alt="tailwind logo"
-          class="rounded-xl"
+        :src="hotel.property.photoUrls ? hotel.property.photoUrls[0] : 'https://via.placeholder.com/500'"
+              alt="Hotel Image"
+              class="rounded-xl"
         />
       </div>
       <div class="w-full md:w-2/3 bg-white flex flex-col space-y-2 p-3">
         <div class="flex justify-between item-center">
-          <p class="text-black font-medium hidden md:block">Julia Dens Resort</p>
-          <div class="bg-red-500 px-3 py-1 rounded-md text-xs font-medium text-white hidden md:block">
-            Book now and receive 15% off
-          </div>
+          <p class="text-black font-medium hidden md:block">{{ hotel.property.name }}</p>
+          <div v-if="hotel.property.discountAvailable" class="bg-red-500 px-3 py-1 rounded-md text-xs font-medium text-white hidden md:block">
+                Book now and receive 15% off
+              </div>
         </div>
         <div class="flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
+          <template>
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
+      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+    </svg>
+  </template>
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
               <path
                 d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
               />
@@ -251,32 +256,27 @@
               <path
                 d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
               />
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
-              <path
-                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-              />
-            </svg>
+            </svg> -->
             <p class="text-gray-500  text-sm ml-1">
-              4.96(76 reviews)
+              {{ hotel.reviewScore }} ({{ hotel.reviewCount }} reviews)
             </p>
           </div>
 
           <div class="flex justify-between items-center">
             <p class=" text-gray-500 text-base">
-          Live a little and celbrate with champagne
+              {{ hotel.property.description }}
         </p>
-        <div class="bg-green-700 px-3 py-1 rounded-md text-xs font-medium text-white hidden md:block">
-             5% off
-          </div>
+        <div v-if="hotel.property.discountAvailable" class="bg-green-700 px-3 py-1 rounded-md text-xs font-medium text-white hidden md:block">
+                5% off
+              </div>
 
           </div>
-          <p class="text-gray-500">Reats include a glass of French champagne, parking and a late checkout. Gym included. Flexible cancellation applies</p>
+          <p class="text-gray-500">{{ hotel.property.additionalDetails }}</p>
        
           <div class="flex justify-between items-center">
             <button class="text-white bg-blue-600 rounded-md py-2 px-3 ">See Availability</button>
            <div>
-            <p class="text-l"><del class="text-red-500">8160</del> $130</p>
+            <p class="text-l"><del class="text-red-500">{{ hotel.property.originalPrice }}</del> {{ hotel.property.discountedPrice }}</p>
             <p class="text-sm text-gray-500">Includes taxes and fees</p>
            </div>
           </div>
@@ -337,6 +337,11 @@ import { ref } from 'vue'; // Make sure to import ref from Vue
 import CovidAlert from '../components/CovidAlert.vue';
 import FooterBar from '../components/FooterBar.vue';
 
+import { onMounted } from 'vue';
+import { useAuthStore } from '../assets/store/index.js';
+
+
+
 export default {
   data() {
     return {
@@ -374,6 +379,20 @@ export default {
     CovidAlert,
     FooterBar,
   },
+
+  setup() {
+    const authStore = useAuthStore();
+    const searchResults = ref(authStore.searchResults);
+
+    onMounted(() => {
+      // Do something when the component is mounted
+    });
+
+    return {
+      searchResults,
+    };
+  },
+
 
   watch: {
     currentPage: 'calculateVisiblePages',

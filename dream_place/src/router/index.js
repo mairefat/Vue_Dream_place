@@ -4,6 +4,8 @@ import SignUp from '../views/SignUp.vue';
 import WelcomeCard from '../views/WelcomeCard.vue';
 import SearchResult from '../views/SearchResult.vue';
 import PropertyDetails from '../views/PropertyDetails.vue';
+import PaymentDetails from '../views/PaymentDetails.vue';
+import UserTrips from '../views/UserTrips.vue'; 
 
 const routes = [
   {
@@ -24,19 +26,30 @@ const routes = [
   {
     path: '/searchResult',
     name: 'searchResult',
-    component: SearchResult
+    component: SearchResult,
+    
   },
   {
     path: '/propertyDetails',
     name: 'PropertyDetails',
     component: PropertyDetails
+  },
+  {
+    path: '/paymentDetails',
+    name: 'PaymentDetails',
+    component: PaymentDetails
+  },
+  {
+    path: '/userTrips',
+    name: 'UserTrips',
+    component: UserTrips
   }
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
-})
+});
 
 export default router
  // path: '/about',
