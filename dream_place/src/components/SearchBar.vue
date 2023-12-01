@@ -222,6 +222,8 @@ import axios from 'axios';
 import { MY_API_KEY } from '@/config';
 import { useAuthStore } from '@/assets/store/index.js';
 
+
+
 const router = useRouter();
 
 const numberOfGuests = ref(1);
@@ -239,7 +241,7 @@ const suggestedLocations = ref([]);
 
 const filteredLocations = computed(() => {
   if (!Array.isArray(suggestedLocations.value)) {
-    console.error('suggestedLocations is not an array:', suggestedLocations.value);
+    // console.error('suggestedLocations is not an array:', suggestedLocations.value);
     return [];
   }
 
@@ -323,7 +325,7 @@ const openDepartureDatePicker = () => {
 
     if (response.data && response.data.status === true) {
       suggestedLocations.value = response.data.data.map((hotel) => hotel.name);
-      console.log('Fetched locations:', suggestedLocations.value);
+      // console.log('Fetched locations:', suggestedLocations.value);
     } else {
       console.error('Error fetching locations. Response:', response.data);
     }
@@ -420,7 +422,7 @@ const formatDate = (date) => {
     // Check if the response is successful and has destination data
     if (destinationResponse.data && destinationResponse.data.status === true) {
       const dest_id = destinationResponse.data.data[0].dest_id; // Assuming the first result
-      console.log('Destination ID:', dest_id);
+      // console.log('Destination ID:', dest_id);
 
       // Prepare API request parameters based on user input and destination data
       const apiParams = {
@@ -448,11 +450,11 @@ const formatDate = (date) => {
 
       const hotelSearchResponse = await axios.request(hotelSearchOptions);
 
-      console.log('Search Results:', hotelSearchResponse.data.data.hotels);
+      // console.log('Search Results:', hotelSearchResponse.data.data.hotels);
 
       // Use the router instance to navigate to the SearchResults component
       router.push({
-        name: 'searchResult', // Ensure the name matches your route configuration
+        name: 'searchResult', 
         params: { hotels: hotelSearchResponse.data.data.hotels },
       });
 

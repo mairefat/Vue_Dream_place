@@ -20,7 +20,7 @@
         <!-- register button -->
 
         <div v-if="!isLoggedIn" class="hidden md:flex items-center space-x-4 bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded">
-      <router-link to="/signup" class="text-white">Register</router-link>
+      <router-link to="/signin" class="text-white">Register</router-link>
     </div>
 
         <!-- notification and profile account -->

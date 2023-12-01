@@ -13,7 +13,10 @@
 
 
 // authStore.js
-import { defineStore } from 'pinia';
+
+import { defineStore, createPinia } from 'pinia';
+
+const pinia = createPinia(); // Create Pinia instance
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
@@ -32,4 +35,4 @@ export const useAuthStore = defineStore('auth', {
   },
 });
 
-
+export { pinia }; 

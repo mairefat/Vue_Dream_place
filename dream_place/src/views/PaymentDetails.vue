@@ -8,15 +8,19 @@
             
             <h2 class="font-semibold text-2xl">Secure your reservation</h2>
             <CovidAlert/>
-           
+            
             <div class="py-10 px-10  grid grid-rows-2 gap-10 lg:flex " >
        <!-- right section  -->
       <div class="lg:w-2/3">
+        <div>
+          <!-- <form @submit.prevent="submitForm" > -->
+       
           <div class="flex flex-col ">
             <div class="  flex p-4 rounded-t-md border border-white   dark:border-blue-600 dark:bg-blue-600">
               <svg xmlns="http://www.w3.org/2000/svg" class="secure" height="1em" viewBox="0 0 512 512"><path d="M256 0c4.6 0 9.2 1 13.4 2.9L457.7 82.8c22 9.3 38.4 31 38.3 57.2c-.5 99.2-41.3 280.7-213.6 363.2c-16.7 8-36.1 8-52.8 0C57.3 420.7 16.5 239.2 16 140c-.1-26.2 16.3-47.9 38.3-57.2L242.7 2.9C246.8 1 251.4 0 256 0z"/></svg>
               <p class="text-white px-2 text-l">Room 1<span class="px-2">2 adults, 1 double bed and 1 twin bed, Non-smoking</span></p>
             </div>
+            
             <div class="w-full mx-auto rounded-md bg-white shadow-lg p-5 text-gray-700">
               <div class="flex px-4 mt-5 gap-8">
                 <div class="flex flex-col mb-2 ">
@@ -26,13 +30,14 @@
       class="bg-gray-200 hover:border-blue-500 py-1 border rounded-md focus:outline-none focus:shadow-outline"
       type="text"
       placeholder="Juilis"
+      required
     />
   </div>
   <div class="flex flex-col mb-2">
 
     <label for="firstName">Last Name</label>
 				<input class=" bg-gray-200 py-1 border rounded-md hover:border-blue-500 focus:outline-none focus:shadow-outline"
-            type="text" placeholder="Lorenzo" />
+            type="text" placeholder="Lorenzo" required />
   </div>
             </div>
 
@@ -40,29 +45,31 @@
             <div class="flex-col flex py-6">
     <label for="mobileNumber" class="px-4">Mobile Number:</label>
     <div class="flex px-4 gap-6">
-      <select
+      <!-- <select
         v-model="selectedCountryCode"
         class="bg-gray-200 py-1 border rounded-md hover:border-blue-500"
         :placeholder="+20"
+        required
       >
         
         <option v-for="country in countries" :key="country.code" :value="country">
           {{ `+${country.callingCode} ${country.name}` }}
         </option>
-      </select>
+      </select> -->
 
       <input
         v-model="phoneNumber"
         type="text"
         :placeholder="88672778 "
         class="bg-gray-200 py-1 border rounded-md hover:border-blue-500 text-lg"
+        required
       >
     </div>
   </div>
   <!-- 88672778 -->
             
   <div class="flex px-4 pb-8">
-    <input type="checkbox" width="20px" height="20px"  >
+    <input type="checkbox" width="20px" height="20px" required >
     <p class="px-2">Receive text alerts about this trip.</p>
   </div>
   
@@ -88,13 +95,13 @@
       <div class="mb-3">
   <label class="font-bold text-sm mb-2 ml-1">Name on card</label>
   <div>
-    <input v-model="nameOnCard" class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="Julius Lorenzo" type="text"/>
+    <input v-model="nameOnCard" required class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="Julius Lorenzo" type="text"/>
   </div>
 </div>
 <div class="mb-3">
   <label class="font-bold text-sm mb-2 ml-1">Debit/Credit card number</label>
   <div>
-    <input v-model="cardNumber" class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="9923 4643 7482 2293" type="text"/>
+    <input v-model="cardNumber" required class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="9923 4643 7482 2293" type="text"/>
   </div>
 </div>
 <div class="mb-3 -mx-2 flex items-end">
@@ -120,13 +127,13 @@
     
     <label class="font-bold text-sm mb-2 ml-1">Security code</label>
   <div>
-    <input v-model="securityCode" class="w-32 px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="543" type="text"/>
+    <input v-model="securityCode" required class="w-32 px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="543" type="text"/>
   </div>
   </div>
   <div class="px-2 w-1/2">
     <label class="font-bold text-sm mb-2 ml-1">Billing Zip code</label>
   <div>
-    <input v-model="securityCode" class="w-32 px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="203846" type="text"/>
+    <input v-model="securityCode" required class="w-32 px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="203846" type="text"/>
   </div>
   </div>
 </div>
@@ -147,9 +154,21 @@
               <p >By clicking the button below, I acknowledge that I have reviewed the <span class="text-blue-500">Privacy Statement</span> and have reviewd and accept the <span class="text-blue-500">Rules and Restrictions</span> and <span class="text-blue-500">Terms of Use.</span> </p>
 
               <div class="pt-3">
-        <button @click="payNow" class="w-100 max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold">
-          <i class="mr-1"></i> Complete Booking
-        </button>
+                <!-- <router-link :to="{ name: 'UserTrips' }"> -->
+                <button
+                v-on:click="showModal = true"
+        class="w-100 max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold"
+      >
+        <i class="mr-1"></i> Complete Booking
+      </button>
+    <!-- </router-link> -->
+    
+      <transition name="bounce" mode="out-in">
+     
+<PaymentModal v-if="showModal" @close="closeModal" />
+
+      </transition>
+
       </div> 
       <div class="flex py-3 ">
         <svg xmlns="http://www.w3.org/2000/svg" class="lock" height="1em" viewBox="0 0 448 512"><path d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z"/></svg>
@@ -162,7 +181,21 @@
   </div>
   </div>
             
-            </div>
+<!-- </form>   -->
+
+<!-- <PaymentModal :isModalOpen="isModalOpen" @closeModal="closeModal">
+           <p class="text-center">Congratulations your reservation has been made. You will be notified 2 days prior the date.</p> -->
+
+
+        <!-- Success message or additional content -->
+
+      <!-- </PaymentModal>       -->
+  </div>
+</div>
+
+            
+
+          
 
        <!-- left section  -->
             <div class="lg:w-1/3">
@@ -171,7 +204,7 @@
 <div class="bg-white shadow rounded">
   <div
     class="w-full  bg-gray-200  p-4 bg-cover bg-center"
-    style="background-image: url('https://images.pexels.com/photos/7989741/pexels-photo-7989741.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'); width: 450px; height: 180px; border-radius: 6px"
+    style="background-image: url('https://th.bing.com/th/id/OIP.uBZzLNUexdwwV7S-lX3o0QHaFj?rs=1&pid=ImgDetMain'); width: 450px; height: 180px; border-radius: 6px"
   >
     <div>
     </div>
@@ -250,71 +283,42 @@
             </div>
             </div>
 
+          </div>
+          </div>
 
 
-
-        </div>
-    </div>
+     
+    
 
 </template>
 
+<script setup>
+import { ref } from 'vue';
+// import { useRouter } from 'vue-router';
+import PaymentModal from '@/components/PaymentModal.vue';
+const showModal = ref(false);
 
-<script>
-import NavBar from '@/components/NavBar.vue';
-import CovidAlert from '../components/CovidAlert.vue';
-// import FooterBar from '@/components/FooterBar.vue';
+// const openModal = () => {
+//   isModalOpen.value = true;
+//   // router.push({ name: 'UserTrips' });
+// };
 
-import CountryCodes from 'country-codes-list';
-
-
-export default {
-  data() {
-    return {
-      countries: [],
-      selectedCountryCode: null,
-      phoneNumber: '',
-      selectedType: "type1",
-    };
-  },
-  mounted() {
-    // Verify that the library is loaded
-    console.log('CountryCodes:', CountryCodes);
-
-    // Fetch and set the country codes list
-    this.countries = Object.entries((CountryCodes && CountryCodes.data) || {}).map(([code, data]) => ({
-      code,
-      callingCode: data?.dial_code || '',
-      name: data?.name || '',
-    }));
-},
-methods: {
-  // Function to handle form submission
-  handleSubmit() {
-    if (this.selectedCountryCode) {
-      const fullPhoneNumber = `+${this.selectedCountryCode.callingCode}${this.phoneNumber}`;
-      // Add your logic for handling the submitted data (e.g., API request)
-      console.log('Submitted:', fullPhoneNumber);
-    } else {
-      console.error('Please select a country');
-    }
-  },
-
-
-  payNow() {
-      // Handle payment logic
-      console.log("Payment initiated");
-    },
-},
-    
-  components: {
-    NavBar,
-    CovidAlert,
-    // FooterBar,
-
-  }
-
+const closeModal = () => {
+  showModal.value = false;
+  // router.push({ name: 'UserTrips' });
 };
+
+// form any logic before showing the modal
+
+  // Show the modal
+ 
+
+
+
 </script>
+
+
+
 
 <style>
 svg.lock{fill:#3b9b76}

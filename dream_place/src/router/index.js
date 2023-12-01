@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
-import SignUp from '../views/SignUp.vue';
+import SignIn from '../views/SignIn.vue';
 import WelcomeCard from '../views/WelcomeCard.vue';
 import SearchResult from '../views/SearchResult.vue';
 import PropertyDetails from '../views/PropertyDetails.vue';
@@ -14,9 +14,9 @@ const routes = [
     component: HomeView
   },
   {
-   path: '/signup',
-   name: 'signup',
-   component: SignUp
+   path: '/signin',
+   name: 'signin',
+   component: SignIn
   },
   {
     path: '/welcom',
@@ -27,7 +27,7 @@ const routes = [
     path: '/searchResult',
     name: 'searchResult',
     component: SearchResult,
-    
+    props: true, 
   },
   {
     path: '/propertyDetails',
