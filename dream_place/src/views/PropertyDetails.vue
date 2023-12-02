@@ -470,6 +470,7 @@ import CovidAlert from '../components/CovidAlert.vue';
 import FooterBar from '../components/FooterBar.vue';
 import NavBar from '../components/NavBar.vue';
 import axios from 'axios';
+// import { useAuthStore } from "@/assets/store";
 
 import {ref, onMounted} from 'vue';
 // import { useAuthStore } from "@/assets/store";
@@ -517,15 +518,14 @@ const getFacilityName = (icon) => {
 //       return ''; // Default classes if the icon is not recognized
 //   }
 // };
-
+const hotelId = localStorage.getItem('hotelId');
 const options = {
   method: 'GET',
   url: 'https://booking-com15.p.rapidapi.com/api/v1/hotels/getHotelDetails',
   params: {
-    hotel_id: '191605',
-    arrival_date: '2023-12-01', // Replace with the actual arrival date
-    departure_date: '2023-12-03', // Replace with the actual departure date
-    
+    hotel_id: hotelId,
+        arrival_date: localStorage.getItem('arrivalDate'),
+        departure_date: localStorage.getItem('departureDate'),
   },
   headers: {
     'X-RapidAPI-Key': MY_API_KEY,
@@ -558,7 +558,7 @@ const apiParams = {
   method: 'GET',
   url: 'https://booking-com15.p.rapidapi.com/api/v1/hotels/getDescriptionAndInfo',
   params: {
-    hotel_id: '191605',
+    hotel_id: hotelId,
     
   },
   headers: {

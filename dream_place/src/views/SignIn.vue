@@ -70,8 +70,6 @@ const closeModal = () => {
 const router = useRouter();
 const authStore = useAuthStore();
 
-// const users = [];
-
 const formData = ref({
   email: '',
   password: '',
@@ -116,6 +114,9 @@ const simulateRegistration = (enteredEmail, enteredPassword) => {
   storedUsers.push({ email: enteredEmail, password: enteredPassword, id: userId });
   localStorage.setItem('users', JSON.stringify(storedUsers));
 
+  // Update the user data in the Pinia store
+  useAuthStore().setUser({ email: enteredEmail, id: userId });
+
   return { success: true, userId };
 };
 
@@ -128,7 +129,7 @@ const submitForm = () => {
 
     if (registrationResult.success) {
       // Continue with your sign-in logic
-      const token = generateToken();
+      const token = generateToken(); // Replace with your actual token generation logic
       authStore.setToken(token);
       router.push('/');
     } else {
@@ -139,10 +140,8 @@ const submitForm = () => {
   }
 };
 
-
 const generateToken = () => {
   // Replace with your actual token generation logic
   return 'exampleToken';
 };
-
 </script>

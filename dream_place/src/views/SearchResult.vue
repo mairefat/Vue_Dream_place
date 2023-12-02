@@ -26,19 +26,20 @@
     No results found
   </h2>
 </div>
-          <div class="items-center justify-end flex-1 hidden space-x-4 md:flex">
-            <!-- <select v-model="selectedType" class="w-32 px-6 border-gray-200 rounded-full">
-          <option>Rent</option>
-          <option>Sell</option>
-        </select> -->
+<div class="items-center justify-end flex-1 hidden space-x-4 md:flex">
+      <select v-model="selectedSort" class="px-2 py-3 border-gray-200 border rounded-md w-44">
+        <option v-for="option in sortOptions" :key="option.id">{{ option.title }}</option>
+      </select>
+    </div>
 
-            <select
+    
+            <!-- <select
               v-model="selectedSort"
               class="px-2 py-3 border-gray-200 border rounded-md w-44"
             >
               <option>Recommended</option>
-            </select>
-          </div>
+            </select> -->
+          
         </div>
 
         <!-- Filter Section -->
@@ -111,7 +112,20 @@
   </label>
 </div>
                       <!-- Set your own budget section -->
-                      <p class="my-4">Set your own budget</p>
+                      <div class="flex gap-6 py-4">
+                        <p class="my-4">Set your own budget</p>
+                      
+                        <button
+    @click="toggle"
+    :class="{ 'bg-blue-500': value, 'bg-gray-400': !value }"
+    class="w-16 h-8 rounded-full focus:outline-none"
+  >
+    <span :class="{ 'translate-x-8': value, 'translate-x-0': !value }" class="block w-8 h-8 bg-white rounded-full shadow-md transform transition-transform"></span>
+  </button>
+
+
+                      </div>
+                     
 
                       <div class="flex justify-between gap-4">
                         <!-- Min budget dropdown -->
@@ -158,9 +172,10 @@
                     </div>
                   </div>
                 </div>
-
+<br>
+<br>
                 <!-- Rating box -->
-                <div class="py-14">
+                <div class="py-16">
                   <div class="mt-5">
                     <div class="py-48">
                       <div class="py-8 relative">
@@ -265,35 +280,35 @@
           <!-- Search Results -->
 <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 w-full xl:grid-cols-1 gap-8">
 
-<!-- Render default search results if no search term -->
-<div v-if="!authStore.searchResults" >
-  <div v-for="(hotel, index) in searchResults" :key="'default_' + index" class="flex-col justify-center">
+ <!-- Render based on whether filters or min/max budget is set -->
+ <div v-if="filtersApplied">
+<div v-for="(hotel, index) in filteredResults" :key="index" class="flex-col justify-center">
   <div
                 class="relative flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs md:max-w-3xl mx-auto border border-white bg-white"
               >
                 <div class="w-full md:w-1/3 bg-white grid place-items-center">
                   <img
-                    :src="hotel.property.photoUrls"
-                    alt="Hotel Image"
-                    style="
-                      width: 285px;
-                      height: 200px;
-                      top: 394px;
-                      left: 445px;
-                      border-radius: 5px;
-                    "
-                  />
+  :src="hotel.property?.photoUrls"
+  alt="Hotel Image"
+  style="
+    width: 285px;
+    height: 200px;
+    top: 394px;
+    left: 445px;
+    border-radius: 5px;
+  "
+/>
                 </div>
                 <div
                   class="w-full md:w-2/3 bg-white flex flex-col space-y-2 p-3"
                 >
                   <div class="flex justify-between item-center">
                     <p class="text-black text-2xl font-medium hidden md:block">
-                      {{ hotel.property.name }}
+                      {{ hotel.property?.name }}
                     </p>
-                    <!--  -->
+                    <!--  v-if="hotel.property.discountAvailable" -->
                     <div
-                      v-if="hotel.property.discountAvailable"
+                     
                       class="bg-red-500 px-3 py-1 rounded-md text-xs font-medium text-white hidden md:block"
                     >
                       Book now and receive 15% off
@@ -303,7 +318,7 @@
                     <div
                       class="flex items-center"
                       v-for="(star, index) in getStars(
-                        hotel.property.reviewScore
+                        hotel.property?.reviewScore
                       )"
                       :key="index"
                     >
@@ -320,8 +335,8 @@
                     </div>
 
                     <p class="text-gray-500 text-sm ml-1">
-                      {{ hotel.property.reviewScore }} ({{
-                        hotel.property.reviewCount
+                      {{ hotel.property?.reviewScore }} ({{
+                        hotel.property?.reviewCount
                       }}
                       reviews)
                     </p>
@@ -329,28 +344,33 @@
 
                   <div class="flex justify-between items-center">
                     <p class="text-gray-500 text-base">
-                      {{ hotel.accessibilityLabel }}
+                      {{ hotel?.accessibilityLabel }}
                     </p>
-
+                    <!-- v-if="hotel.property?.discountAvailable" -->
                     <div
-                      v-if="hotel.property.discountAvailable"
+                      
                       class="bg-green-700 px-3 py-1 rounded-md text-xs font-medium text-white hidden md:block"
                     >
                       5% off
                     </div>
                   </div>
 
+                  
+                 
+
                   <div class="flex justify-between items-center">
-                    <button class="text-white bg-blue-600 rounded-md py-2 px-3">
-                      See Availability
-                    </button>
+                    <router-link :to="{ name: 'PropertyDetails', params: { id: hotel.property?.id } }">
+          <button class="text-white bg-blue-600 rounded-md py-2 px-3">
+            See Availability
+          </button>
+        </router-link>
                     <div>
                       <div class="flex">
                         <del class="text-red-500">
                           $
                           {{
-                            hotel.property.priceBreakdown.strikethroughPrice
-                              ? hotel.property.priceBreakdown.strikethroughPrice.value.toFixed(
+                            hotel.property?.priceBreakdown.strikethroughPrice
+                              ? hotel.property?.priceBreakdown.strikethroughPrice.value.toFixed(
                                   0
                                 )
                               : ""
@@ -359,7 +379,7 @@
                         <p class="text-l font-semibold">
                           $
                           {{
-                            hotel.property.priceBreakdown.grossPrice.value.toFixed(
+                            hotel.property?.priceBreakdown.grossPrice.value.toFixed(
                               0
                             )
                           }}
@@ -372,37 +392,37 @@
                   </div>
                 </div>
               </div>
-              </div>
+</div>
 </div>
 
-<!-- Render search results if a search term is present -->
-<div v-else v-for="(hotel, index) in authStore.searchResults" :key="'search_' + hotel.property.id + '_' + index" class="flex-col justify-center">
+<div v-else>
+  <div v-for="(hotel, index) in searchResults" :key="index" class="flex-col justify-center">
   <div
                 class="relative flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs md:max-w-3xl mx-auto border border-white bg-white"
               >
                 <div class="w-full md:w-1/3 bg-white grid place-items-center">
                   <img
-                    :src="hotel.property.photoUrls"
-                    alt="Hotel Image"
-                    style="
-                      width: 285px;
-                      height: 200px;
-                      top: 394px;
-                      left: 445px;
-                      border-radius: 5px;
-                    "
-                  />
+  :src="hotel.property?.photoUrls"
+  alt="Hotel Image"
+  style="
+    width: 285px;
+    height: 200px;
+    top: 394px;
+    left: 445px;
+    border-radius: 5px;
+  "
+/>
                 </div>
                 <div
                   class="w-full md:w-2/3 bg-white flex flex-col space-y-2 p-3"
                 >
                   <div class="flex justify-between item-center">
                     <p class="text-black text-2xl font-medium hidden md:block">
-                      {{ hotel.property.name }}
+                      {{ hotel.property?.name }}
                     </p>
-                    <!--  -->
+                    <!--  v-if="hotel.property.discountAvailable" -->
                     <div
-                      v-if="hotel.property.discountAvailable"
+                     
                       class="bg-red-500 px-3 py-1 rounded-md text-xs font-medium text-white hidden md:block"
                     >
                       Book now and receive 15% off
@@ -412,7 +432,7 @@
                     <div
                       class="flex items-center"
                       v-for="(star, index) in getStars(
-                        hotel.property.reviewScore
+                        hotel.property?.reviewScore
                       )"
                       :key="index"
                     >
@@ -429,8 +449,8 @@
                     </div>
 
                     <p class="text-gray-500 text-sm ml-1">
-                      {{ hotel.property.reviewScore }} ({{
-                        hotel.property.reviewCount
+                      {{ hotel.property?.reviewScore }} ({{
+                        hotel.property?.reviewCount
                       }}
                       reviews)
                     </p>
@@ -438,28 +458,33 @@
 
                   <div class="flex justify-between items-center">
                     <p class="text-gray-500 text-base">
-                      {{ hotel.accessibilityLabel }}
+                      {{ hotel?.accessibilityLabel }}
                     </p>
-
+                    <!-- v-if="hotel.property?.discountAvailable" -->
                     <div
-                      v-if="hotel.property.discountAvailable"
+                      
                       class="bg-green-700 px-3 py-1 rounded-md text-xs font-medium text-white hidden md:block"
                     >
                       5% off
                     </div>
                   </div>
 
+                  
+                 
+
                   <div class="flex justify-between items-center">
-                    <button class="text-white bg-blue-600 rounded-md py-2 px-3">
-                      See Availability
-                    </button>
+                    <router-link :to="{ name: 'PropertyDetails', params: { id: hotel.property?.id } }" >
+          <button class="text-white bg-blue-600 rounded-md py-2 px-3">
+            See Availability
+          </button>
+          </router-link>
                     <div>
                       <div class="flex">
                         <del class="text-red-500">
                           $
                           {{
-                            hotel.property.priceBreakdown.strikethroughPrice
-                              ? hotel.property.priceBreakdown.strikethroughPrice.value.toFixed(
+                            hotel.property?.priceBreakdown.strikethroughPrice
+                              ? hotel.property?.priceBreakdown.strikethroughPrice.value.toFixed(
                                   0
                                 )
                               : ""
@@ -468,7 +493,7 @@
                         <p class="text-l font-semibold">
                           $
                           {{
-                            hotel.property.priceBreakdown.grossPrice.value.toFixed(
+                            hotel.property?.priceBreakdown.grossPrice.value.toFixed(
                               0
                             )
                           }}
@@ -483,9 +508,8 @@
               </div>
 </div>
 
- 
+</div>
 
-        
             <!-- Pagination section -->
             <div class="mt-8 bottom-0 h-screen">
               <div
@@ -571,7 +595,7 @@
 
 
 <script setup>
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted, watch, computed } from "vue";
 import axios from 'axios';
 import NavBar from "../components/NavBar.vue";
 import SearchBar from "../components/SearchBar.vue";
@@ -584,68 +608,70 @@ const currentPage = ref(1);
 const totalPages = ref(20);
 const pagesToShow = 5;
 const visiblePages = ref([]);
-const selectedSort = ref("Recommended");
+// const selectedSort = ref("Recommended");
 const filterRanges = ref({
   '$0-$100': false,
   '$200-$500': false,
   '$500-$1000': false,
+  '$1000-$2000': false,
+  '$2000-$5000': false,
 });
+
+const budgetRanges = ["$0-$100", "$200-$500", "$500-$1000","$1000-$2000", "$2000-$5000"];
 const minBudget = ref(100);
 const maxBudget = ref(5000);
 const numbers = Array.from({ length: 4901 }, (_, i) => i + 100);
 const authStore = useAuthStore();
 const searchResults = ref(authStore.searchResults);
+const value = ref(false);
 
 
-onMounted(async () => {
-  await fetchData();
-});
+const selectedSort = ref('Popularity'); // Initial value
 
-const getDestinationId = async (query) => {
-  const options = {
-    method: 'GET',
-    url: 'https://booking-com15.p.rapidapi.com/api/v1/hotels/searchDestination',
-    params: {
-      query: query,
-    },
-    headers: {
-      'X-RapidAPI-Key': MY_API_KEY,
-      'X-RapidAPI-Host': 'booking-com15.p.rapidapi.com',
-    },
-  };
+const sortOptions = ref([]); // Options retrieved from the API
 
-  try {
-    const response = await axios.request(options);
-    return response.data.data[0].dest_id;
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
+
+
+
+const toggle = () => {
+  value.value = !value.value;
+  fetchData(); 
 };
 
-const fetchData = async (page = 1) => {
+const filtersApplied = computed(() => {
+  return Object.values(filterRanges).some(value => value) || minBudget.value !== 100 || maxBudget.value !== 5000;
+});
+
+const filteredResults = ref([]);
+
+const fetchDataAndUpdateResults = async () => {
+  // Call the fetchData function and update filteredResults
+  filteredResults.value = await fetchData();
+};
+
+// Watch for changes in filterRanges, minBudget, or maxBudget and update results accordingly
+watch([filterRanges, minBudget, maxBudget], fetchDataAndUpdateResults);
+
+onMounted(fetchDataAndUpdateResults);
+
+
+const fetchData = async () => {
   try {
-    const destId = await getDestinationId('man'); 
+    // authStore.setLoading(true); // Set loading state to true
 
-    if (!destId) {
-      console.error('Failed to get destination ID');
-      return;
-    }
-    console.log('Destination ID:', destId);
-    const apiParams = {
-      dest_id: destId,
-      search_type: 'CITY',
-      arrival_date: formatDate(authStore.checkinDate),
-      departure_date: formatDate(authStore.checkoutDate),
-      page_number: page,
-      
-    };
-
-    const hotelSearchOptions = {
+    const destId = localStorage.getItem('destId');
+    const options = {
       method: 'GET',
       url: 'https://booking-com15.p.rapidapi.com/api/v1/hotels/searchHotels',
       params: {
-        apiParams
+        dest_id: destId,
+        search_type: 'CITY',
+        arrival_date: localStorage.getItem('arrivalDate'),
+        departure_date: localStorage.getItem('departureDate'),
+        min_price: minBudget.value,
+        max_price: maxBudget.value,
+        budget_ranges: Object.keys(filterRanges).filter(key => filterRanges[key]).join(','),
+        // budget_ranges: Object.keys(authStore.filterRanges).filter(key => authStore.filterRanges[key]).join(','),
       },
       headers: {
         'X-RapidAPI-Key': MY_API_KEY,
@@ -653,46 +679,84 @@ const fetchData = async (page = 1) => {
       },
     };
 
-    const response = await axios.request(hotelSearchOptions);
+    const response = await axios.request(options);
+    console.log(response.data);
 
-    if (response.data.status && response.data.data && response.data.data.hotels.length > 0) {
-      searchResults.value = response.data.data.hotels;
+    // Check if the expected properties are available in the response
+    const arrivalDate = response.data.message[2]?.arrival_date;
+    const departureDate = response.data.message[4]?.departure_date;
 
-      console.log('Hotel Data:', response.data.data.hotels);
-      // Update other state variables as needed
-    }
+    const filteredResults = response.data.data.hotels;
+    // Update searchResults in the store
+    authStore.updateSearchResults(response.data, arrivalDate, departureDate);
+
+    return filteredResults;
   } catch (error) {
     console.error(error);
   }
 };
-const formatDate = (dateString) => {
-  const date = new Date(dateString);
-  const year = date.getFullYear();
-  const month = (date.getMonth() + 1).toString().padStart(2, '0');
-  const day = date.getDate().toString().padStart(2, '0');
-  return `${year}-${month}-${day}`;
+
+
+
+onMounted(async () => {
+  await fetchData();
+});
+
+const destId = localStorage.getItem('destId');
+
+const options = {
+  
+  method: 'GET',
+  url: 'https://booking-com15.p.rapidapi.com/api/v1/hotels/getSortBy',
+  params: {
+    dest_id: destId,
+        search_type: 'CITY',
+        arrival_date: localStorage.getItem('arrivalDate'),
+        departure_date: localStorage.getItem('departureDate'),
+   
+  },
+  headers: {
+    'X-RapidAPI-Key': MY_API_KEY,
+    'X-RapidAPI-Host': 'booking-com15.p.rapidapi.com',
+  },
 };
+
+// Fetch sort options and hotels from the API
+onMounted(async () => {
+  try {
+    const response = await axios.request(options);
+    sortOptions.value = response.data.data;
+    console.log(response.data.data);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+
+
+
 
 const prevPage = () => {
   if (currentPage.value > 1) {
     currentPage.value -= 1;
     fetchData(currentPage.value);
   }
-}
+};
 
 const nextPage = () => {
   if (currentPage.value < totalPages.value) {
     currentPage.value += 1;
     fetchData(currentPage.value);
   }
-}
+};
 
 const goToPage = (page) => {
   if (page !== currentPage.value && page >= 1 && page <= totalPages.value) {
     currentPage.value = page;
     fetchData(page);
   }
-}
+};
+
 
 const searchTerm = ref('');
 

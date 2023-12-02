@@ -44,7 +44,20 @@
             <!-- select countery code and input mobile number  -->
             <div class="flex-col flex py-6">
     <label for="mobileNumber" class="px-4">Mobile Number:</label>
-    <div class="flex px-4 gap-6">
+    <div class="  flex px-4 gap-6">
+      <div class="border border-gray-200 flex p-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="25" viewBox="0 0 600 400">
+        <rect width="600" height="80" fill="#e32213"/>
+        <rect width="600" height="80" y="160" fill="#fff"/>
+        <rect width="600" height="80" y="320" fill="#000"/>
+      </svg>
+      <!-- <label for="countrySelector">+02</label> -->
+  <select id="countrySelector" >
+    <option value="+02">+02</option>
+  </select>
+</div>
+  <!-- SVG for the flag of Egypt -->
+  
       <!-- <select
         v-model="selectedCountryCode"
         class="bg-gray-200 py-1 border rounded-md hover:border-blue-500"
@@ -293,6 +306,8 @@
 </template>
 
 <script setup>
+import CovidAlert from '../components/CovidAlert.vue';
+import NavBar from '../components/NavBar.vue';
 import { ref } from 'vue';
 // import { useRouter } from 'vue-router';
 import PaymentModal from '@/components/PaymentModal.vue';

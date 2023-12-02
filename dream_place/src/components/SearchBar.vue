@@ -398,6 +398,13 @@ const formatDate = (date) => {
     const handleSearch = async () => {
   console.log('handleSearch function called');
 
+   // Check if the user is registered
+   if (!useAuthStore().isUserRegistered()) {
+    // If not registered, redirect to the sign-in page
+    router.push('/signin');
+    return;
+  }
+  
   // Validate user input
   if (!searchQuery.value || !arrivalDate.value || !departureDate.value) {
     // Display an error message or handle it appropriately
@@ -454,13 +461,13 @@ const formatDate = (date) => {
 
       // Use the router instance to navigate to the SearchResults component
       router.push({
-        name: 'searchResult', 
-        params: { hotels: hotelSearchResponse.data.data.hotels },
-      });
+    name: 'searchResult',
+    params: { hotels: hotelSearchResponse.data.data.hotels },
+  });
 
-      // Process the API response and update the state to render results
-      await updateSearchResults(hotelSearchResponse.data.data.hotels);
-    } else {
+  // Process the API response and update the state to render results
+  await updateSearchResults(hotelSearchResponse.data.data.hotels);
+ } else {
       console.error('Error fetching destination data. Response:', destinationResponse.data);
     }
   } catch (error) {
@@ -472,6 +479,7 @@ const formatDate = (date) => {
 const updateSearchResults = async (hotels) => {
   await useAuthStore().updateSearchResults(hotels);
 };
+
 
 
 </script>
